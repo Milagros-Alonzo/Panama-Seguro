@@ -1,0 +1,124 @@
+{
+  "realm": "panama-seguro",
+  "displayName": "Panamá Seguro",
+  "enabled": true,
+  "sslRequired": "external",
+  "registrationAllowed": true,
+  "registrationEmailAsUsername": true,
+  "loginWithEmailAllowed": true,
+  "duplicateEmailsAllowed": false,
+  "resetPasswordAllowed": true,
+  "verifyEmail": false,
+  "bruteForceProtected": true,
+  "internationalizationEnabled": true,
+  "supportedLocales": ["es"],
+  "defaultLocale": "es",
+  "accessTokenLifespan": 300,
+  "ssoSessionIdleTimeout": 86400,
+  "ssoSessionMaxLifespan": 1209600,
+  "offlineSessionIdleTimeout": 2592000,
+  "passwordPolicy": "length(10) and notUsername",
+  "roles": {
+    "realm": [
+      {
+        "name": "administrador",
+        "description": "Administrador global de la plataforma. Los demás roles se asignan por territorio y emergencia en api-core."
+      }
+    ]
+  },
+  "clients": [
+    {
+      "clientId": "panama-seguro-web",
+      "name": "Panamá Seguro (web)",
+      "enabled": true,
+      "publicClient": true,
+      "protocol": "openid-connect",
+      "standardFlowEnabled": true,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "serviceAccountsEnabled": false,
+      "redirectUris": [
+        "http://localhost:8080/*",
+        "http://localhost:5173/*"
+      ],
+      "webOrigins": [
+        "http://localhost:8080",
+        "http://localhost:5173"
+      ],
+      "attributes": {
+        "pkce.code.challenge.method": "S256",
+        "post.logout.redirect.uris": "http://localhost:8080/*##http://localhost:5173/*"
+      },
+      "protocolMappers": [
+        {
+          "name": "audiencia-api",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-audience-mapper",
+          "consentRequired": false,
+          "config": {
+            "included.custom.audience": "panama-seguro-api",
+            "access.token.claim": "true",
+            "id.token.claim": "false"
+          }
+        }
+      ]
+    }
+  ],
+  "users": [
+    {
+      "id": "00000000-0000-4000-8000-000000000001",
+      "username": "admin@panamaseguro.local",
+      "email": "admin@panamaseguro.local",
+      "firstName": "Admin",
+      "lastName": "Desarrollo",
+      "enabled": true,
+      "emailVerified": true,
+      "realmRoles": ["default-roles-panama-seguro", "administrador"],
+      "credentials": [{ "type": "password", "value": "desarrollo123", "temporary": false }]
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000002",
+      "username": "coordinadora@panamaseguro.local",
+      "email": "coordinadora@panamaseguro.local",
+      "firstName": "Coordinadora",
+      "lastName": "Desarrollo",
+      "enabled": true,
+      "emailVerified": true,
+      "realmRoles": ["default-roles-panama-seguro"],
+      "credentials": [{ "type": "password", "value": "desarrollo123", "temporary": false }]
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000003",
+      "username": "verificador@panamaseguro.local",
+      "email": "verificador@panamaseguro.local",
+      "firstName": "Verificador",
+      "lastName": "Desarrollo",
+      "enabled": true,
+      "emailVerified": true,
+      "realmRoles": ["default-roles-panama-seguro"],
+      "credentials": [{ "type": "password", "value": "desarrollo123", "temporary": false }]
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000004",
+      "username": "reportera@panamaseguro.local",
+      "email": "reportera@panamaseguro.local",
+      "firstName": "Reportera",
+      "lastName": "Desarrollo",
+      "enabled": true,
+      "emailVerified": true,
+      "realmRoles": ["default-roles-panama-seguro"],
+      "credentials": [{ "type": "password", "value": "desarrollo123", "temporary": false }]
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000005",
+      "username": "ciudadano@panamaseguro.local",
+      "email": "ciudadano@panamaseguro.local",
+      "firstName": "Ciudadano",
+      "lastName": "Desarrollo",
+      "enabled": true,
+      "emailVerified": true,
+      "realmRoles": ["default-roles-panama-seguro"],
+      "credentials": [{ "type": "password", "value": "desarrollo123", "temporary": false }]
+    }
+  ]
+}
